@@ -1,0 +1,28 @@
+@media (max-width: 780px) {
+  .content-header-adm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+   
+  .footer-header-adm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-title-adm h1{
+    font-size: 2rem;
+  }
+
+  .btn-add-header-adm{
+    width: 90%;
+  }
+
+  .page-header .row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

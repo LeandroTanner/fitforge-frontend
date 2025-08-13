@@ -1,0 +1,40 @@
+.user-selector {
+    width: 100%;
+  }
+  
+  .user-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2c3e50;
+    background-color: white;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .user-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  }
+  
+  .user-select:disabled {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  .user-selector-loading,
+  .user-selector-error {
+    padding: 12px;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    text-align: center;
+    color: #6c757d;
+  }
+  
+  .user-selector-error {
+    color: #e74c3c;
+    border-color: #e74c3c;
+  }
