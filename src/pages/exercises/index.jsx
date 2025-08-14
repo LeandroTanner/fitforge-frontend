@@ -100,8 +100,6 @@ const Exercises = () => {
       <HeaderAdm 
         title="Gerenciar Exercícios"
         description="Gerencie todos os exercícios disponíveis"
-        buttonText="exercício"
-        icon={<BicepsFlexed  size={35} className="me-2 mb-2" />}
       />
 
       {/* Filter */}

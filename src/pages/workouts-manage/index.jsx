@@ -180,7 +180,7 @@ const WorkoutManage = () => {
             {/* Modal do formulário de exercício */}
             {showExerciseForm && (
                 <div className="modal-overlay">
-                    <div className="modal-content">
+                    <div className="content-add-exercise">
                         <ExerciseForm
                             exercise={editingExercise}
                             onSave={handleSaveExercise}

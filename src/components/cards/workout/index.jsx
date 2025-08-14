@@ -1,7 +1,6 @@
 import { Dumbbell, Pencil, Trash2, User, Calendar, Clock } from 'lucide-react';
 import './style.css'
 import { Link } from 'react-router-dom';
-import { formatDate } from '../../../utils/formatters';
 
 const WorkoutCard = ({ id, name, description, exercises, isStandard, handleDeleteWorkout, userName, createdAt, updatedAt }) => {
     const formatDateShort = (dateString) => {
@@ -38,6 +37,7 @@ const WorkoutCard = ({ id, name, description, exercises, isStandard, handleDelet
                 </div>
             </div>
 
+            <div className="workout-card-content">
             <div className="workout-card-body"> 
                 <p className="workout-description">
                     {description || "Sem descrição"}
@@ -71,6 +71,7 @@ const WorkoutCard = ({ id, name, description, exercises, isStandard, handleDelet
                         </div>
                     )}
                 </div>
+            </div>
             </div>
 
             <div className="workout-card-footer">

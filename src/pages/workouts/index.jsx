@@ -127,18 +127,12 @@ const Workouts = () => {
         description="Crie e gerencie treinos personalizados"
         buttonText="treino"
         icon={<Dumbbell className="me-2 mb-2" size={35} />}
+        route='/workouts/manage'
       />
 
       {/* Filters */}
       <div className="filters-section">
-        <div className="search-filter">
-          <InputSearch 
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar treinos por nome ou descrição..."
-          />
-        </div>
-        
+
         <div className="user-filter">
           <div className="filter-label">
             <Filter size={16} />
@@ -158,10 +152,20 @@ const Workouts = () => {
             ))}
           </select>
         </div>
+
+        <div className="search-filter">
+          <InputSearch 
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar treinos por nome ou descrição..."
+          />
+        </div>
+        
+        
       </div>
 
       {/* Content */}
-      <div className="container mt-4">
+      <div className="container mt-4 pt-2 pb-5">
         {filteredWorkouts.length > 0 ? (
           <div className="workouts-grid">
             {filteredWorkouts.map((workout) => (
@@ -180,7 +184,7 @@ const Workouts = () => {
 
             {/* Add New Workout Card */}
             <div className="add-workout-card">
-              <Link to="/workouts/new" className="add-workout-link">
+              <Link to="/workouts/manage" className="add-workout-link">
                 <div className="add-workout-icon">
                   <Plus size={32} />
                 </div>
