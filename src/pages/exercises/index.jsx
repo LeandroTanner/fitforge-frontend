@@ -106,7 +106,7 @@ const Exercises = () => {
       <InputSearch 
         value={search} 
         onChange={(e) => setSearch(e.target.value)} 
-        placeholder="Buscar exercícios por nome ou categoria..." 
+        placeholder="Buscar exercícios por nome ou descrição..." 
       />
 
       <div className="container mt-4">
