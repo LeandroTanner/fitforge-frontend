@@ -18,6 +18,8 @@ const ExerciseList = ({ exercises, onEdit, onDelete, onAdd }) => {
     );
   }
 
+  console.log('MEUS EXERCICIOS: ', exercises)
+
   return (
     <div className="exercise-list">
       <div className="exercise-list-header">
@@ -30,6 +32,7 @@ const ExerciseList = ({ exercises, onEdit, onDelete, onAdd }) => {
 
       <div className="exercises-grid">
         {exercises.map((exercise, index) => (
+          
           <div key={`${exercise.exerciseId}-${index}`} className="exercise-item">
             <div className="exercise-header">
               <h4 className="exercise-name">{exercise.name || `Exercício ${index + 1}`}</h4>

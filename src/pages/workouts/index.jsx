@@ -127,7 +127,7 @@ const Workouts = () => {
         description="Crie e gerencie treinos personalizados"
         buttonText="treino"
         icon={<Dumbbell className="me-2 mb-2" size={35} />}
-        route='/workouts/manage'
+        route='/workouts/manage/new'
       />
 
       {/* Filters */}
@@ -184,7 +184,7 @@ const Workouts = () => {
 
             {/* Add New Workout Card */}
             <div className="add-workout-card">
-              <Link to="/workouts/manage" className="add-workout-link">
+              <Link to="/workouts/manage/new" className="add-workout-link">
                 <div className="add-workout-icon">
                   <Plus size={32} />
                 </div>
@@ -206,7 +206,7 @@ const Workouts = () => {
               }
             </p>
             {!search && selectedUser === "all" && (
-              <Link to="/workouts/new" className="btn btn-primary btn-lg">
+              <Link to="/workouts/manage/new" className="btn btn-primary btn-lg">
                 <Plus size={16} className="me-2" />
                 Criar Primeiro Treino
               </Link>

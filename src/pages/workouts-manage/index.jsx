@@ -49,28 +49,36 @@ const WorkoutManage = () => {
 
     // Mapeia o estado para a UI
     useEffect(() => {
-        if (workoutData.name) {
+        if (isCreating) {
+            // Durante criação, usar valores padrão
+            setWorkoutName('');
+            setWorkoutDescription('');
+            setSelectedUser('standard');
+        } else if (workoutData.name) {
+            // Durante edição, usar dados do treino
             setWorkoutName(workoutData.name);
             setWorkoutDescription(workoutData.description);
             setSelectedUser(workoutData.isStandard ? 'standard' : workoutData.userId);
         }
-    }, [workoutData]);
+    }, [workoutData, isCreating]);
 
     // Busca os dados do treino e dos usuários ao carregar o componente
     useEffect(() => {
         const fetchAllData = async () => {
             try {
                 setLoading(true);
+                setError(null);
                 
                 // Busca os dados dos usuários
                 const usersResponse = await getAllUsersBasic();
                 setUsers(usersResponse.data?.data || []);
                 
                 // Se não for criação, busca os dados do treino
-                if (!isCreating) {
+                if (!isCreating && workoutId !== 'new') {
                     const workoutResponse = await getWorkoutById(workoutId);
                     const workoutDataFromResponse = workoutResponse.data?.data;
                     setWorkoutData(workoutDataFromResponse);
+                    console.log('CARALHO AQUI OS EXERCICIOS: ', workoutDataFromResponse)
                     setExercises(workoutDataFromResponse.exercises || []);
                 }
             } catch (err) {
@@ -80,9 +88,15 @@ const WorkoutManage = () => {
                 setLoading(false);
             }
         };
-
+    
         fetchAllData();
     }, [workoutId, isCreating]);
+
+    useEffect(() => {
+        console.log('isCreating:', isCreating);
+        console.log('loading:', loading);
+        // ... resto do código
+    }, [workoutData, isCreating]);
 
     const handleSave = async () => {
         try {
