@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { getImageUrl } from '../../../services/api'
 import defaultImage from '../../../assets/images/examples/treinoAbdominal.png'
 import { SquarePen, Trash2 } from 'lucide-react'
 import './style.css'
@@ -7,7 +7,7 @@ const ExerciseCard = ({ id, name, description, imageUrl, equipmentRequired, hand
   return (
     <div key={id} className="exercise-card">
       <div className="exercise-card-image">
-        <img className='exercise-image' src={imageUrl || defaultImage} alt={name} />
+        <img className='exercise-image' src={getImageUrl(imageUrl) || defaultImage} alt={name} />
       </div>
 
       <div className="card-content-wrapper">

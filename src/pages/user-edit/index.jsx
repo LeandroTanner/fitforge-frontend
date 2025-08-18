@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getUserById, createUser, updateUser } from "../../services/api/users.js"
+import ProfileImageUpload from '../../components/inputs/profileImageUpload/index.jsx';
+import UserWorkouts from '../../components/userWorkouts/index.jsx';
 import { useModal } from "../../contexts/ModalContext.jsx"
 import Loading from "../../components/loader/index.jsx"
 import "./style.css"
@@ -18,11 +20,6 @@ const UserEdit = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
-    age: "",
-    weight: "",
-    height: "",
-    goal: "",
     profilePicture: "",
   })
 
@@ -36,7 +33,7 @@ const UserEdit = () => {
     try {
       setLoading(true)
       const response = await getUserById(id)
-      setFormData(response.data)
+      setFormData(response.data?.data)
     } catch (error) {
       showDanger("Erro", "Não foi possível carregar os dados do usuário")
       navigate("/users")
@@ -65,7 +62,12 @@ const UserEdit = () => {
       setSaving(true)
 
       if (isEditing) {
-        await updateUser(id, formData)
+        const filteredFormData = {
+          name: formData.name,
+          email: formData.email,
+          profilePicture: formData.profilePicture,
+        }
+        await updateUser(id, filteredFormData)
         showSuccess("Sucesso", "Usuário atualizado com sucesso!")
       } else {
         await createUser(formData)
@@ -145,102 +147,13 @@ const UserEdit = () => {
                     </div>
                   </div>
 
-                  <div className="row">
-                    <div className="col-md-6 mb-3">
-                      <label htmlFor="phone" className="form-label">
-                        Telefone
-                      </label>
-                      <input
-                        type="tel"
-                        className="form-control"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="col-md-6 mb-3">
-                      <label htmlFor="age" className="form-label">
-                        Idade
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="age"
-                        name="age"
-                        value={formData.age}
-                        onChange={handleInputChange}
-                        min="1"
-                        max="120"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-md-6 mb-3">
-                      <label htmlFor="weight" className="form-label">
-                        Peso (kg)
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="weight"
-                        name="weight"
-                        value={formData.weight}
-                        onChange={handleInputChange}
-                        step="0.1"
-                        min="1"
-                      />
-                    </div>
-                    <div className="col-md-6 mb-3">
-                      <label htmlFor="height" className="form-label">
-                        Altura (cm)
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="height"
-                        name="height"
-                        value={formData.height}
-                        onChange={handleInputChange}
-                        min="50"
-                        max="250"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mb-3">
-                    <label htmlFor="goal" className="form-label">
-                      Objetivo
-                    </label>
-                    <select
-                      className="form-select"
-                      id="goal"
-                      name="goal"
-                      value={formData.goal}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">Selecione um objetivo</option>
-                      <option value="perda_peso">Perda de Peso</option>
-                      <option value="ganho_massa">Ganho de Massa Muscular</option>
-                      <option value="definicao">Definição</option>
-                      <option value="resistencia">Resistência</option>
-                      <option value="forca">Força</option>
-                    </select>
-                  </div>
-
                   <div className="mb-4">
-                    <label htmlFor="profilePicture" className="form-label">
-                      URL da Foto de Perfil
+                    <label className="form-label">
+                      Foto de Perfil
                     </label>
-                    <input
-                      type="url"
-                      className="form-control"
-                      id="profilePicture"
-                      name="profilePicture"
-                      value={formData.profilePicture}
-                      onChange={handleInputChange}
-                      placeholder="https://exemplo.com/foto.jpg"
+                    <ProfileImageUpload
+                      onImageUpload={(url) => setFormData(prev => ({ ...prev, profilePicture: url }))}
+                      currentImageUrl={formData.profilePicture}
                     />
                   </div>
 
@@ -267,6 +180,34 @@ const UserEdit = () => {
             </div>
           </div>
         </div>
+
+        {/* Seção de Treinos do Usuário */}
+        {isEditing && (
+          <div className="row justify-content-center mt-5">
+            <div className="col-lg-8">
+              <div className="card shadow-sm">
+                <div className="card-body p-4">
+                  <div className="d-flex justify-content-between align-items-center mb-4">
+                    <h4 className="mb-0">
+                      <i className="fas fa-dumbbell me-2"></i>
+                      Treinos do Usuário
+                    </h4>
+                    <button 
+                      type="button" 
+                      className="btn btn-success"
+                      onClick={() => navigate(`/workouts/manage/new?userId=${id}`)}
+                    >
+                      <i className="fas fa-plus me-2"></i>
+                      Criar Novo Treino
+                    </button>
+                  </div>
+                  
+                  <UserWorkouts userId={id} />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

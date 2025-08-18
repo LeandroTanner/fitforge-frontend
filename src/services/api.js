@@ -1,9 +1,9 @@
 import axios from "axios"
 
-const api_base_url = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
-  baseURL: api_base_url,
+  baseURL: API_BASE_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -13,7 +13,6 @@ const api = axios.create({
 // Interceptor para requests
 api.interceptors.request.use(
   (config) => {
-    console.log(`Making ${config.method.toUpperCase()} request to: ${config.url}`)
     return config
   },
   (error) => {
@@ -25,7 +24,6 @@ api.interceptors.request.use(
 // Interceptor para responses
 api.interceptors.response.use(
   (response) => {
-    console.log(`Response from ${response.config.url}:`, response.data)
     return response
   },
   (error) => {
@@ -43,5 +41,15 @@ api.interceptors.response.use(
     return Promise.reject(error)
   },
 )
+
+export const getImageUrl = (imagePath) => {
+  if (!imagePath) return null;
+  
+  if (imagePath.startsWith('http')) {
+    return imagePath;
+  }
+  
+  return `${API_BASE_URL}${imagePath}`;
+};
 
 export default api

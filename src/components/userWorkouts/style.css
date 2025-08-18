@@ -1,0 +1,146 @@
+.user-workouts {
+    margin-top: 20px;
+  }
+  
+  .workouts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .workout-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+  }
+  
+  .workout-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .workout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  
+  .workout-name {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    flex: 1;
+  }
+  
+  .workout-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
+  
+  .workout-badge.standard {
+    background: #e3f2fd;
+    color: #1976d2;
+  }
+  
+  .workout-badge.user {
+    background: #e8f5e8;
+    color: #2e7d32;
+  }
+  
+  .workout-content {
+    margin-bottom: 15px;
+  }
+  
+  .workout-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  
+  .workout-stats {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+  
+  .stat {
+    display: flex;
+    align-items: center;
+  }
+  
+  .workout-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .workout-actions .btn {
+    flex: 1;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  
+  .empty-workouts {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .empty-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #4f8cff 0%, #a084ee 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2rem;
+    color: white;
+  }
+  
+  .empty-workouts h5 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .empty-workouts p {
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .workouts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .workout-header {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .workout-badge {
+      align-self: flex-start;
+      margin-left: 0;
+    }
+    
+    .workout-stats {
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .workout-actions {
+      flex-direction: column;
+    }
+  }

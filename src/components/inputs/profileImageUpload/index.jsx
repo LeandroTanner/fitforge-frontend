@@ -1,13 +1,22 @@
-import { useState, useRef } from 'react';
-import { getImageUrl } from '../../../services/api';
-import { Upload, X, Image as ImageIcon } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Upload, X, User } from 'lucide-react';
+import { getImageUrl } from '../../../services/api.js';
 import './style.css';
 
-const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
-  const [preview, setPreview] = useState(currentImageUrl || null);
+const ProfileImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
+  const [preview, setPreview] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
+
+  // Atualizar preview quando currentImageUrl mudar
+  useEffect(() => {
+    if (currentImageUrl) {
+      setPreview(getImageUrl(currentImageUrl));
+    } else {
+      setPreview(null);
+    }
+  }, [currentImageUrl]);
 
   const handleFileSelect = async (event) => {
     const file = event.target.files[0];
@@ -20,9 +29,9 @@ const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
       return;
     }
 
-    // Validar tamanho (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setError('Arquivo muito grande. Máximo 5MB.');
+    // Validar tamanho (2MB para fotos de perfil)
+    if (file.size > 2 * 1024 * 1024) {
+      setError('Arquivo muito grande. Máximo 2MB.');
       return;
     }
 
@@ -33,7 +42,7 @@ const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
       const formData = new FormData();
       formData.append('image', file);
 
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/upload/exercise-image`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/upload/profile-image`, {
         method: 'POST',
         body: formData,
       });
@@ -64,7 +73,7 @@ const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
   };
 
   return (
-    <div className={`image-upload ${className}`}>
+    <div className={`profile-image-upload ${className}`}>
       <input
         ref={fileInputRef}
         type="file"
@@ -74,8 +83,8 @@ const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
       />
 
       {preview ? (
-        <div className="image-preview">
-          <img src={preview} alt="Preview" />
+        <div className="profile-image-preview">
+          <img src={preview} alt="Foto de perfil" />
           <button
             type="button"
             className="remove-image"
@@ -87,17 +96,17 @@ const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
         </div>
       ) : (
         <div
-          className="upload-area"
+          className="profile-upload-area"
           onClick={() => fileInputRef.current?.click()}
         >
-          <ImageIcon size={48} />
-          <p>Clique para selecionar uma imagem</p>
-          <span>JPEG, PNG ou WebP (máx. 5MB)</span>
+          <User size={48} />
+          <p>Clique para selecionar uma foto</p>
+          <span>JPEG, PNG ou WebP (máx. 2MB)</span>
         </div>
       )}
 
       {uploading && (
-        <div className="upload-loading">
+        <div className="profile-upload-loading">
           <Upload size={20} className="spinning" />
           <span>Fazendo upload...</span>
         </div>
@@ -112,4 +121,4 @@ const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
   );
 };
 
-export default ImageUpload;
+export default ProfileImageUpload;

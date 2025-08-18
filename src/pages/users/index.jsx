@@ -10,6 +10,7 @@ import "./style.css"
 import HeaderAdm from "../../components/page-header/header-adm/index.jsx"
 import { Users2Icon } from "lucide-react"
 import InputSearch from "../../components/inputs/inputSearch/index.jsx"
+import UserModal from "../../components/modal/userModal/index.jsx"
 
 const Users = () => {
   const [users, setUsers] = useState([])
@@ -17,10 +18,24 @@ const Users = () => {
   const [error, setError] = useState(null)
   const [search, setSearch] = useState('')
   const { showConfirm, showSuccess, showDanger } = useModal()
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
     fetchUsers()
   }, [])
+
+  const handleUserCreated = (newUser) => {
+    setUsers(prev => [...prev, newUser]);
+    showSuccess("Usuário criado", `O usuário "${newUser.name}" foi criado com sucesso.`);
+  };
+
+  const handleUserUpdated = (updatedUser) => {
+    setUsers(prev => prev.map(user => 
+      user.id === user.id ? updatedUser : user
+    ));
+    showSuccess("Usuário atualizado", `O usuário "${updatedUser.name}" foi atualizado com sucesso.`);
+  };
 
   const fetchUsers = async () => {
     try {
@@ -85,7 +100,6 @@ const Users = () => {
       <HeaderAdm 
         title="Controle de usuários"
         description="Gerencie os usuários do sistema, adicione novos, edite ou exclua conforme necessário."
-        buttonText="Usuário"
         icon={<Users2Icon className="me-2 mb-2" size={35} />}
       />
 
@@ -115,12 +129,12 @@ const Users = () => {
 
             {/* Add New User Card */}
             <div className="add-user-card">
-              <Link to="/users/new" className="add-user-link">
+              <button onClick={() => setIsModalOpen(true)} className="add-user-link">
                 <div className="add-user-icon">
                   <i className="fas fa-plus"></i>
                 </div>
                 <h5>Adicionar Novo Usuário</h5>
-              </Link>
+              </button>
             </div>
           </div>
         ) : (
@@ -131,14 +145,28 @@ const Users = () => {
             <h3>{search ? "Nenhum usuário encontrado" : "Nenhum usuário cadastrado"}</h3>
             <p>{search ? "Tente buscar por outro nome ou email." : "Crie um novo usuário."}</p>
             {!search && (
-              <Link to="/users/new" className="btn btn-primary btn-lg">
+              <button onClick={() => setIsModalOpen(true)} className="btn btn-primary btn-lg">
               <i className="fas fa-plus me-2"></i>
               Adicionar Primeiro Usuário
-              </Link>
+              </button>
             )}
           </div>
         )}
       </div>
+
+      {/* ====== Modal de criação de usuário ====== */}
+      <UserModal 
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setEditingUser(null);
+        }}
+        onUserCreated={handleUserCreated}
+        onUserUpdated={handleUserUpdated}
+        userToEdit={editingUser}
+        isEditing={!!editingUser} 
+      />
+
     </div>
   )
 }

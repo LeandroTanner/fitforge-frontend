@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { X, Save, Loader2 } from 'lucide-react';
 import { createExercise, updateExercise } from '../../../services/api/exercises.js';
 import ImageUpload from '../../inputs/imageUpload/index.jsx';
+import { getImageUrl } from '../../../services/api.js';
 import './style.css';
 
 const ExerciseModal = ({ isOpen, onClose, onExerciseCreated, exerciseToEdit, isEditing = false, onExerciseUpdated }) => {
@@ -21,7 +22,6 @@ const ExerciseModal = ({ isOpen, onClose, onExerciseCreated, exerciseToEdit, isE
         description: exerciseToEdit.description || '',
         equipmentRequired: exerciseToEdit.equipmentRequired || ''
       });
-      console.log('URL imagem: ', exerciseToEdit.imageUrl);
       setImageUrl(exerciseToEdit.imageUrl || null);
     }
   }, [exerciseToEdit])

@@ -8,6 +8,7 @@ import UserSelector from '../../components/user-selector/index.jsx';
 import ExerciseList from '../../components/exercise-list/index.jsx';
 import ExerciseForm from '../../components/exercise-form/index.jsx';
 import { useModal } from '../../contexts/ModalContext.jsx';
+import { useSearchParams } from 'react-router-dom';
 import './style.css';
 import { Save, X, Dumbbell, ArrowLeft } from 'lucide-react';
 
@@ -19,6 +20,8 @@ const WorkoutManage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isCreating, setIsCreating] = useState(false);
+    const [searchParams] = useSearchParams();
+    const userIdFromUrl = searchParams.get('userId');
     
     const [workoutData, setWorkoutData] = useState({
         createdAt: null,
@@ -40,7 +43,7 @@ const WorkoutManage = () => {
     // Estado local para os campos de input
     const [workoutName, setWorkoutName] = useState('');
     const [workoutDescription, setWorkoutDescription] = useState('');
-    const [selectedUser, setSelectedUser] = useState('standard');
+    const [selectedUser, setSelectedUser] = useState(userIdFromUrl || 'standard');
 
     // Detectar se é criação ou edição
     useEffect(() => {
@@ -53,7 +56,7 @@ const WorkoutManage = () => {
             // Durante criação, usar valores padrão
             setWorkoutName('');
             setWorkoutDescription('');
-            setSelectedUser('standard');
+            setSelectedUser(userIdFromUrl || 'standard');
         } else if (workoutData.name) {
             // Durante edição, usar dados do treino
             setWorkoutName(workoutData.name);
@@ -78,7 +81,6 @@ const WorkoutManage = () => {
                     const workoutResponse = await getWorkoutById(workoutId);
                     const workoutDataFromResponse = workoutResponse.data?.data;
                     setWorkoutData(workoutDataFromResponse);
-                    console.log('CARALHO AQUI OS EXERCICIOS: ', workoutDataFromResponse)
                     setExercises(workoutDataFromResponse.exercises || []);
                 }
             } catch (err) {
@@ -93,10 +95,10 @@ const WorkoutManage = () => {
     }, [workoutId, isCreating]);
 
     useEffect(() => {
-        console.log('isCreating:', isCreating);
-        console.log('loading:', loading);
-        // ... resto do código
-    }, [workoutData, isCreating]);
+        if(userIdFromUrl){
+            setSelectedUser(userIdFromUrl)
+        }
+    }, [userIdFromUrl])
 
     const handleSave = async () => {
         try {
@@ -117,7 +119,11 @@ const WorkoutManage = () => {
                 showSuccess("Treino Atualizado", "Treino atualizado com sucesso!");
             }
             
-            navigate('/workouts');
+            if(userIdFromUrl){
+                navigate(`/users/${userIdFromUrl}`);
+            } else {
+                navigate('/workouts');
+            }
         } catch (err) {
             showDanger("Erro", "Erro ao salvar treino. Tente novamente.");
         }

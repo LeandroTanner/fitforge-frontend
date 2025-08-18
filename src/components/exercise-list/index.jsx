@@ -18,8 +18,6 @@ const ExerciseList = ({ exercises, onEdit, onDelete, onAdd }) => {
     );
   }
 
-  console.log('MEUS EXERCICIOS: ', exercises)
-
   return (
     <div className="exercise-list">
       <div className="exercise-list-header">

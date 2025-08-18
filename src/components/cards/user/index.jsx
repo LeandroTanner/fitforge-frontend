@@ -3,6 +3,7 @@
 import "./style.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashCan, faPen, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons"
+import { getImageUrl } from "../../../services/api"
 
 const User = ({ id, name, email, profilePicture, onDelete }) => {
   const editUser = (idUser) => {
@@ -30,13 +31,16 @@ const User = ({ id, name, email, profilePicture, onDelete }) => {
       .slice(0, 2)
   }
 
+  const fullProfileUrl = getImageUrl(profilePicture); 
+
   return (
     /* ------ Div do card geral de usuários */
     <div className="user-card">
       {/* ------ Seção da foto de perfil do usuário */}
       <div className="user-card-avatar">
         {profilePicture ? (
-          <img src={profilePicture || "/placeholder.svg"} alt={`Foto de ${name}`} />
+          
+          <img src={fullProfileUrl} alt={`Foto de ${name}`} />
         ) : (
           <div className="user-card-avatar-fallback">{getInitials(name)}</div>
         )}
