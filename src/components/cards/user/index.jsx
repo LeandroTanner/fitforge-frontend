@@ -4,11 +4,14 @@ import "./style.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashCan, faPen, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { getImageUrl } from "../../../services/api"
+import { useNavigate } from "react-router-dom"
 
 const User = ({ id, name, email, profilePicture, onDelete }) => {
+  const navigate = useNavigate()
+  
   const editUser = (idUser) => {
     // Navegar para página de edição
-    window.location.href = `/users/${idUser}`
+    navigate(`/users/${idUser}`);
   }
 
   const deleteUser = (idUser, username) => {
