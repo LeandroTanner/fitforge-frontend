@@ -105,20 +105,3 @@ export const validateForm = (data, rules) => {
     errors,
   }
 }
-
-// Exemplo de uso:
-// const rules = {
-//   name: [
-//     (value) => validateText.required(value, 'Nome'),
-//     (value) => validateText.minLength(value, 2, 'Nome')
-//   ],
-//   email: [
-//     (value) => validateText.required(value, 'Email'),
-//     (value) => validateText.email(value)
-//   ],
-//   age: [
-//     (value) => validateNumber.required(value, 'Idade'),
-//     (value) => validateNumber.isNumber(value, 'Idade'),
-//     (value) => validateNumber.min(value, 1, 'Idade')
-//   ]
-// };
