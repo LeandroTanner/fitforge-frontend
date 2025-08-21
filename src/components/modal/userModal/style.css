@@ -4,26 +4,32 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
     padding: 20px;
+    animation: userModalFadeIn 0.3s ease-out;
   }
   
-  .user-modal {
+  .user-modal-content {
     background: white;
     border-radius: 16px;
     width: 100%;
     max-width: 600px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: modalSlideIn 0.3s ease-out;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    animation: userModalSlideIn 0.3s ease-out;
   }
   
-  @keyframes modalSlideIn {
+  @keyframes userModalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes userModalSlideIn {
     from {
       opacity: 0;
       transform: translateY(-20px) scale(0.95);
@@ -38,9 +44,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 24px 0;
+    padding: 24px;
     border-bottom: 1px solid #e9ecef;
-    margin-bottom: 24px;
   }
   
   .user-modal-header h3 {
@@ -50,77 +55,76 @@
     font-size: 1.5rem;
   }
   
-  .user-close-button {
+  .user-modal-close-button {
     background: none;
     border: none;
     color: #6c757d;
     cursor: pointer;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 50%;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
-  .user-close-button:hover {
-    background: #f8f9fa;
+  .user-modal-close-button:hover {
+    background: #f1f3f5;
     color: #dc3545;
   }
   
   .user-modal-form {
-    padding: 0 24px 24px;
+    padding: 24px;
   }
   
-  .form-group {
+  .user-modal-form-group {
     margin-bottom: 20px;
   }
   
-  .form-group label {
+  .user-modal-form-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #2c3e50;
+    color: #343a40;
     font-size: 0.95rem;
   }
   
-  .form-group input,
-  .form-group textarea {
+  .user-modal-form-group input {
     width: 100%;
     padding: 12px 16px;
-    border: 2px solid #e9ecef;
+    border: 1px solid #ced4da;
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: #f8f9fa;
+  }
+  
+  .user-modal-form-group input:focus {
+    outline: none;
+    border-color: #fd7e14;
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.15);
     background: white;
   }
   
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: #fd7e14;
-    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.1);
-  }
-  
-  .form-group input.error,
-  .form-group textarea.error {
+  .user-modal-form-group input.error {
     border-color: #dc3545;
   }
   
-  .error-message {
+  .user-modal-error-message {
     color: #dc3545;
     font-size: 0.85rem;
     margin-top: 5px;
     display: block;
   }
   
-  .submit-error {
+  .user-modal-submit-error {
     background: #f8d7da;
     color: #721c24;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 20px;
     font-size: 0.9rem;
+    text-align: center;
   }
   
   .user-modal-actions {
@@ -149,24 +153,24 @@
     cursor: not-allowed;
   }
   
-  .btn-outline-secondary {
+  .user-modal-actions .btn-outline-secondary {
     background: white;
     color: #6c757d;
-    border: 2px solid #6c757d;
+    border: 2px solid #ced4da;
   }
   
-  .btn-outline-secondary:hover:not(:disabled) {
+  .user-modal-actions .btn-outline-secondary:hover:not(:disabled) {
     background: #6c757d;
     color: white;
+    border-color: #6c757d;
   }
   
-  .btn-primary {
+  .user-modal-actions .btn-primary {
     background: linear-gradient(135deg, #fd7e14 0%, #ffc107 100%);
     color: white;
-    border: 2px solid #fd7e14;
   }
   
-  .btn-primary:hover:not(:disabled) {
+  .user-modal-actions .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(253, 126, 20, 0.3);
   }
@@ -182,17 +186,6 @@
   
   /* Responsivo */
   @media (max-width: 768px) {
-    .user-modal {
-      margin: 10px;
-      max-height: 95vh;
-    }
-    
-    .user-modal-header,
-    .user-modal-form {
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-    
     .user-modal-actions {
       flex-direction: column;
     }

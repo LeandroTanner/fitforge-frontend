@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+const API_KEY = import.meta.env.VITE_API_PUBLIC_KEY;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -13,7 +14,9 @@ const api = axios.create({
 // Interceptor para requests
 api.interceptors.request.use(
   (config) => {
-    return config
+    // Adiciona a chave da API nos headers das requisições
+    config.headers['x-api-key'] = API_KEY;
+    return config;
   },
   (error) => {
     console.error("Request Error: ", error)
@@ -44,11 +47,9 @@ api.interceptors.response.use(
 
 export const getImageUrl = (imagePath) => {
   if (!imagePath) return null;
-  
   if (imagePath.startsWith('http')) {
     return imagePath;
   }
-  
   return `${API_BASE_URL}${imagePath}`;
 };
 

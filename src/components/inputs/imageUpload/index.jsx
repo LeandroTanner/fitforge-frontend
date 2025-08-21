@@ -1,13 +1,17 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { getImageUrl } from '../../../services/api';
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
 import './style.css';
 
 const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
-  const [preview, setPreview] = useState(currentImageUrl || null);
+  const [preview, setPreview] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    setPreview(getImageUrl(currentImageUrl));
+  }, [currentImageUrl]);
 
   const handleFileSelect = async (event) => {
     const file = event.target.files[0];
@@ -33,17 +37,21 @@ const ImageUpload = ({ onImageUpload, currentImageUrl, className = '' }) => {
       const formData = new FormData();
       formData.append('image', file);
 
+      const API_KEY = import.meta.env.VITE_API_PUBLIC_KEY; 
+
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/upload/exercise-image`, {
         method: 'POST',
+        headers: {
+          'x-api-key': API_KEY, 
+        },
         body: formData,
       });
 
       const data = await response.json();
 
       if (data.success) {
-        const imageUrl = data?.data.imageUrl; // URL relativa do backend
-        setPreview(getImageUrl(imageUrl)); // Preview com URL completa
-        onImageUpload(imageUrl); // Salva URL relativa no banco
+        const imageUrl = data?.data.imageUrl; 
+        onImageUpload(imageUrl); 
       } else {
         setError(data.message || 'Erro ao fazer upload');
       }

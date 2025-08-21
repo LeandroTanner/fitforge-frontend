@@ -26,4 +26,4 @@ dist-ssr
 
 # Arquivos de ambiente
 .env
-.env.production
+.env.local

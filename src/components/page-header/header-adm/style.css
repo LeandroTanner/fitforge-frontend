@@ -26,3 +26,8 @@
     align-items: center;
   }
 }
+
+.page-header{
+  max-width: 100%;
+  margin: 0;
+}

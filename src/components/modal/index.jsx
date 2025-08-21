@@ -22,14 +22,14 @@ const Modal = () => {
     hideModal()
   }
 
-  const getModalClass = () => {
+  const getModalStatusClass = () => {
     switch (modal.status) {
       case "success":
-        return "modal-success"
+        return "confirmation-modal-success"
       case "danger":
-        return "modal-danger"
+        return "confirmation-modal-danger"
       default:
-        return "modal-info"
+        return "confirmation-modal-info"
     }
   }
 
@@ -45,20 +45,20 @@ const Modal = () => {
   }
 
   return (
-    <div className="modal-overlay" onClick={hideModal}>
-      <div className={`modal-content ${getModalClass()}`} onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <div className="modal-icon">
+    <div id="confirmation-modal-overlay" onClick={hideModal}>
+      <div className={`confirmation-modal-content ${getModalStatusClass()}`} onClick={(e) => e.stopPropagation()}>
+        <div className="confirmation-modal-header">
+          <div className="confirmation-modal-icon">
             <i className={getIcon()}></i>
           </div>
-          <h4 className="modal-title">{modal.title}</h4>
+          <h4 className="confirmation-modal-title">{modal.title}</h4>
         </div>
 
-        <div className="modal-body">
-          <p className="modal-message">{modal.message}</p>
+        <div className="confirmation-modal-body">
+          <p className="confirmation-modal-message">{modal.message}</p>
         </div>
 
-        <div className="modal-footer">
+        <div className="confirmation-modal-footer">
           {modal.showCancel && (
             <button className="btn btn-secondary" onClick={handleCancel}>
               Cancelar

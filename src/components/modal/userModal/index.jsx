@@ -23,8 +23,6 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
         }
       }, [userToEdit])
 
-
-
       const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -40,8 +38,6 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
         }
       };
 
-
-
       const validateForm = () => {
         const newErrors = {};
         
@@ -56,7 +52,6 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
       };
-
 
       const handleSubmit = async (e) => {
         e.preventDefault();
@@ -104,7 +99,6 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
         }
       };
 
-
       const handleClose = () => {
         if (!loading) {
           setFormData({
@@ -117,18 +111,16 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
         }
       };
 
-
       if (!isOpen) return null;
-      
 
     return (
         <div className="user-modal-overlay" onClick={handleClose}>
-            <div className="user-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="user-modal-content" onClick={(e) => e.stopPropagation()}>
                 <div className="user-modal-header">
                 <h3>{isEditing ? 'Editar usuário' : 'Adicionar novo usuário'}</h3>
                 <button 
                     type="button" 
-                    className="user-close-button" 
+                    className="user-modal-close-button" 
                     onClick={handleClose}
                     disabled={loading}
                 >
@@ -137,7 +129,7 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
                 </div>
 
                 <form onSubmit={handleSubmit} className="user-modal-form">
-                <div className="form-group">
+                <div className="user-modal-form-group">
                     <label htmlFor="name">Nome do usuário *</label>
                     <input
                         type="text"
@@ -149,10 +141,10 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
                         placeholder="Insira o nome do novo usuário..."
                         disabled={loading}
                     />
-                    {errors.name && <span className="error-message">{errors.name}</span>}
+                    {errors.name && <span className="user-modal-error-message">{errors.name}</span>}
                 </div>
 
-                <div className="form-group">
+                <div className="user-modal-form-group">
                     <label htmlFor="email">Email *</label>
                     <input
                         type="email"
@@ -164,10 +156,10 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
                         placeholder="Insira o email desse usuário..."
                         disabled={loading}
                     />
-                    {errors.email && <span className="error-message">{errors.email}</span>}
+                    {errors.email && <span className="user-modal-error-message">{errors.email}</span>}
                 </div>
 
-                <div className="form-group">
+                <div className="user-modal-form-group">
                     <label>Imagem de perfil</label>
                     <ProfileImageUpload
                         onImageUpload={setProfilePicture}
@@ -176,7 +168,7 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
                 </div>
 
                 {errors.submit && (
-                    <div className="submit-error">
+                    <div className="user-modal-submit-error">
                     <span>{errors.submit}</span>
                     </div>
                 )}
@@ -215,4 +207,4 @@ const UserModal = ({ isOpen, onClose, onUserCreated, userToEdit, isEditing = fal
     )
 }
 
-export default UserModal
+export default UserModal;

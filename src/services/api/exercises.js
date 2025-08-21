@@ -1,5 +1,8 @@
 import api from "../api.js"
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+const API_KEY = import.meta.env.VITE_API_PUBLIC_KEY;
+
 // Buscar todos os exercícios
 export const getAllExercises = async () => {
   try {
@@ -107,8 +110,11 @@ export const uploadExerciseImage = async (imageFile) => {
     const formData = new FormData();
     formData.append('image', imageFile);
 
-    const response = await fetch('http://localhost:3000/upload/exercise-image', {
+    const response = await fetch(`${API_BASE_URL}/upload/exercise-image`, {
       method: 'POST',
+      headers:{
+        'x-api-key': API_KEY, // Adiciona a chave da API nos headers da requisição
+      },
       body: formData,
     });
 
@@ -117,7 +123,7 @@ export const uploadExerciseImage = async (imageFile) => {
     if (data.success) {
       return {
         success: true,
-        data: `http://localhost:3000${data.data.imageUrl}`,
+        data: `${API_BASE_URL}${data.data.imageUrl}`,
         message: "Imagem enviada com sucesso",
       };
     } else {
