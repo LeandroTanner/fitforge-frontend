@@ -1,5 +1,5 @@
 import { getImageUrl } from '../../../services/api'
-import defaultImage from '../../../assets/images/examples/treinoAbdominal.png'
+import defaultImage from '../../../assets/images/examples/_defaultExerciseImg.jpg'
 import { SquarePen, Trash2 } from 'lucide-react'
 import './style.css'
 
