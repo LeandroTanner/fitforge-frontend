@@ -7,7 +7,15 @@ const ExerciseCard = ({ id, name, description, imageUrl, equipmentRequired, hand
   return (
     <div key={id} className="exercise-card">
       <div className="exercise-card-image">
-        <img className='exercise-image' src={getImageUrl(imageUrl) || defaultImage} alt={name} />
+        <img
+          className="exercise-image"
+          src={getImageUrl(imageUrl) || defaultImage}
+          alt={name}
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = defaultImage;
+          }}
+        />
       </div>
 
       <div className="card-content-wrapper">
