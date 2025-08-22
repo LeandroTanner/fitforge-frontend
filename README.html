@@ -1,0 +1,271 @@
+<style>
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2c3e50;
+        --background-color: #f8f9fa;
+        --text-color: #333;
+        --card-bg: #ffffff;
+        --border-color: #e9ecef;
+        --code-bg: #e8e8e8;
+        --important-bg: #fff5f5;
+        --important-border: #f5c6cb;
+        --important-text: #721c24;
+    }
+    .readme-container {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        padding: 25px;
+        border-radius: 10px;
+    }
+    .readme-container h1, .readme-container h2, .readme-container h3 {
+        color: var(--secondary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    .readme-container h1 {
+        text-align: center;
+        font-size: 2.5em;
+        border-bottom: none;
+    }
+    .readme-container .section {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .readme-container p {
+        margin-bottom: 15px;
+    }
+    .readme-container a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .readme-container a:hover {
+        text-decoration: underline;
+    }
+    .readme-container ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    .readme-container ul li {
+        background-color: #f8f9fa;
+        border-left: 4px solid var(--primary-color);
+        padding: 10px 15px;
+        margin-bottom: 8px;
+        border-radius: 4px;
+    }
+    .readme-container .tech-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .readme-container .tech-category {
+        padding: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+    .readme-container code {
+        background-color: var(--code-bg);
+        color: #c7254e;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+    .important-notice {
+        background-color: var(--important-bg);
+        border: 1px solid var(--important-border);
+        color: var(--important-text);
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+    .important-notice h2 {
+        color: #c0392b !important;
+        border-bottom: none;
+        margin-top: 0;
+        font-size: 1.5em;
+    }
+    .important-notice blockquote {
+        margin: 0;
+        padding: 15px;
+        border-left: 5px solid #c0392b;
+        background-color: #fff;
+    }
+    .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 15px;
+        text-align: center;
+    }
+    .image-gallery .gallery-item img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+    .image-gallery .gallery-item img:hover {
+        transform: scale(1.03);
+    }
+    .image-gallery .gallery-item p {
+        margin-top: 10px;
+        font-weight: 600;
+        color: var(--secondary-color);
+    }
+</style>
+
+<div class="readme-container">
+
+    <h1>FitForge</h1>
+
+    <div class="section">
+        <p>
+            <strong>FitForge</strong> é um sistema web desenvolvido como projeto de vitrine para demonstrar um possível sistema interno de gerenciamento de alunos, treinos e exercícios voltado a personal trainers. O objetivo principal é servir como uma <strong>"vitrine" funcional</strong> que apresenta fluxos típicos (CRUD de usuários, treinos e exercícios) e integração frontend ↔ backend, sem entrar na complexidade de autenticação e controle de acesso — por isso <strong>não há sistema de login</strong> neste projeto.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>🔗 Links</h2>
+        <ul>
+            <li><strong>Site oficial:</strong> <a href="https://fitforge.ltdev.site" target="_blank">https://fitforge.ltdev.site</a></li>
+            <li><strong>Repositório (frontend):</strong> <a href="https://github.com/LeandroTanner/fitforge-frontend.git" target="_blank">https://github.com/LeandroTanner/fitforge-frontend.git</a></li>
+            <li><strong>API (endpoints principais):</strong> <a href="https://fitforgeapi.ltdev.site" target="_blank">https://fitforgeapi.ltdev.site</a>
+                <ul>
+                    <li>Rotas principais: <code>/users</code>, <code>/workouts</code>, <code>/exercises</code></li>
+                </ul>
+            </li>
+            <li><strong>Portfólio:</strong> <a href="https://ltdev.site" target="_blank">https://ltdev.site</a> <em>(Será atualizado em breve)</em></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Tecnologias utilizadas</h2>
+        <div class="tech-section">
+            <div class="tech-category">
+                <h3>Frontend</h3>
+                <ul>
+                    <li>React (Framework)</li>
+                    <li>Bootstrap (Estilização)</li>
+                    <li>FontAwesome (Ícones)</li>
+                    <li>Lucide React (Ícones)</li>
+                    <li>Axios (Requisições HTTP)</li>
+                    <li>GetForm (serviço externo para envio de formulário)</li>
+                </ul>
+            </div>
+            <div class="tech-category">
+                <h3>Backend</h3>
+                <ul>
+                    <li>Node.js</li>
+                    <li>Express</li>
+                    <li>CORS (configuração de políticas de origem)</li>
+                    <li>RateLimit (limitação de requisições por IP)</li>
+                    <li>Prisma ORM (modelo e acesso ao banco)</li>
+                </ul>
+            </div>
+            <div class="tech-category">
+                <h3>Banco de dados</h3>
+                <ul>
+                    <li>MongoDB</li>
+                    <li>Mongo Atlas (hospedagem do banco)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Arquitetura e hospedagem</h2>
+        <ul>
+            <li><strong>Frontend hospedado em:</strong> Vercel</li>
+            <li><strong>Backend hospedado em:</strong> Railway</li>
+            <li><strong>Banco de dados hospedado em:</strong> Mongo Atlas</li>
+        </ul>
+        <p>A comunicação entre frontend e backend é feita via API REST na base <code>https://fitforgeapi.ltdev.site</code>, que expõe recursos para gerenciar usuários, treinos e exercícios.</p>
+    </div>
+
+    <div class="section">
+        <h2>Funcionalidades principais</h2>
+        <ul>
+            <li>Listagem, criação, edição e exclusão de <strong>usuários</strong> (alunos).</li>
+            <li>Listagem, criação, edição e exclusão de <strong>workouts</strong> (treinos).</li>
+            <li>Listagem, criação, edição e exclusão de <strong>exercises</strong> (exercícios).</li>
+            <li>Integração do frontend com a API usando Axios.</li>
+            <li>Formulário de contato integrado via GetForm.</li>
+            <li>Proteções no backend: CORS configurado e RateLimit para reduzir abuso de requisições.</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>Como testar a API</h2>
+        <p>Você pode testar a API de duas formas principais: pela interface do site (frontend), assim você pode ter a experiencia de um usuário desse sistema (ex: personal trainer).</p>
+        <p>Caso queria testar a API diretamente em serviços como o Postman, peço que envie um email no formulário do site no final da página inicial (Clique no botão CONTATO e seja direcionado.) com o assunto <code>Solicitação de teste de api - FitForge</code>, para que eu forneça as credenciais públicas para seus testes. Para entender melhor, deixarei uma explicação abaixo.</p>
+    </div>
+
+    <div class="important-notice">
+        <h2 style="color: #c0392b; font-weight: 700">IMPORTANTE</h2>
+        <blockquote>
+            <strong>A api não recebe requisições públicas?</strong>
+            <p>É importante ressaltar que essa aplicação não possui autenticação de usuário, mas ainda assim possui credenciais. Como este é um projeto exposto publicamente e eu vou utilizá-lo para demonstrar meu conhecimento, eu não poderia deixar livre para que qualquer pessoa pudesse inserir textos e imagens no app sem controle nenhum.</p>
+        </blockquote>
+        <blockquote>
+            <strong>Mas... Como resolver isso?</strong>
+            <p>É aí que entra o "sistema de segurança" da minha api! <br> Para realizar requisições públicas, do tipo <code>GET</code>, o sistema aceita uma chave de api pública, utilizada no site, ou seja, os usuários que acessarem só podem ver os dados inseridos.<br> Para realizar gravação de dados no projeto { <code>POST</code>, <code>UPDATE</code>, <code>DELETE</code> } , é necessário uma chave de api privada que <strong>nunca</strong> será compartilhada.<br> Por isso que caso queira realizar testes no serviço, entre em contato por email, assim eu posso lhe fornecer a chave pública apenas para consulta de dados.</p>
+        </blockquote>
+        <p style="text-align:center; margin-top: 20px;"><strong>Base da API:</strong> <code>https://fitforgeapi.ltdev.site</code></p>
+    </div>
+
+    <div class="section">
+        <h2>Imagens do Projeto</h2>
+        <p>Abaixo estão algumas capturas de tela que demonstram a interface e as funcionalidades do FitForge em diferentes dispositivos.</p>
+        <div class="image-gallery">
+            <div class="gallery-item">
+                <img src="./_images-project-examples/_homepage-notebook.png" alt="Página Inicial - Notebook">
+                <p>Página Inicial - Notebook</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./_images-project-examples/_homepage-tablet.png" alt="Página Inicial - Tablet">
+                <p>Página Inicial - Tablet</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./_images-project-examples/_homepage-mobile.png" alt="Página Inicial - Celular">
+                <p>Página Inicial - Celular</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./_images-project-examples/_users-notebook.png" alt="Listagem de Usuários - Notebook">
+                <p>Listagem de Usuários - Notebook</p>
+            </div>
+             <div class="gallery-item">
+                <img src="./_images-project-examples/_users-tablet.png" alt="Listagem de Usuários - Tablet">
+                <p>Listagem de Usuários - Tablet</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./_images-project-examples/_users-mobile.png" alt="Listagem de Usuários - Celular">
+                <p>Listagem de Usuários - Celular</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./_images-project-examples/_workouts.png" alt="Listagem de Treinos">
+                <p>Listagem de Treinos</p>
+            </div>
+             <div class="gallery-item">
+                <img src="./_images-project-examples/_edit-workout.png" alt="Edição de Treino">
+                <p>Edição de Treino</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./_images-project-examples/_exercises.png" alt="Listagem de Exercícios">
+                <p>Listagem de Exercícios</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./_images-project-examples/_edit-exercise.png" alt="Edição de Exercício">
+                <p>Edição de Exercício</p>
+            </div>
+        </div>
+    </div>
+</div>
