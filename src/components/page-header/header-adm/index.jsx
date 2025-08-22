@@ -5,7 +5,6 @@ import './style.css'
 const HeaderAdm = ( { title, description, buttonText, icon, route = '/users/new' } ) => {
     return (
         <div className="page-header">
-            {/* ADICIONE A CLASSE "container" AQUI */}
             <div className="container">
                 <div className="row align-items-center content-header-adm">
                     <div className="col-md-8 header-title-adm">

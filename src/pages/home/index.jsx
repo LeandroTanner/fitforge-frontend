@@ -144,7 +144,7 @@ const Home = () => {
       </section>
 
 
-      {/* 4. O componente do modal */}
+      {/* modal de sucesso no envio de email */}
       {showModal && (
         <div className="modal-backdrop">
           <div className="modal-content text-center">
