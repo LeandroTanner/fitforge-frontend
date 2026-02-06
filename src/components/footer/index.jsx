@@ -50,7 +50,7 @@ const Footer = () => {
             <h6 className="footer-title">Criador por</h6>
             <p>Leandro Arantes Tanner</p>
             <div className="social-links">
-              <a href="https://ltdev.site" target="_blank" className="social-link">
+              <a href="https://ltanner.dev" target="_blank" className="social-link">
                 <Globe /> { /* Icone de globo para representar o portifólio */ }
               </a>
               <a href="https://github.com/LeandroTanner" target="_blank" className="social-link">
